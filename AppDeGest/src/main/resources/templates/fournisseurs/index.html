@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Fournisseurs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        .status-active {
+            color: green;
+        }
+        .status-inactive {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<h2>Liste des Fournisseurs</h2>
+<a href="/fournisseurs/create">Ajouter un Fournisseur</a>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Téléphone</th>
+        <th>Adresse</th>
+        <th>Actif</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="fournisseur : ${fournisseurs}">
+        <td th:text="${fournisseur.id_four}"></td>
+        <td th:text="${fournisseur.nom_four}"></td>
+        <td th:text="${fournisseur.tel_four}"></td>
+        <td th:text="${fournisseur.adresse_four}"></td>
+        <td>
+            <span th:text="${fournisseur.actif ? 'Actif' : 'Inactif'}"
+                  th:classappend="${fournisseur.actif ? 'status-active' : 'status-inactive'}"></span>
+        </td>
+        <td>
+            <a th:href="@{/fournisseurs/edit/{id}(id=${fournisseur.id_four})}">Modifier</a>
+            <a th:href="@{/fournisseurs/delete/{id}(id=${fournisseur.id_four})}"
+               th:onclick="return confirm('Voulez-vous vraiment supprimer ce fournisseur ?')">Supprimer</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

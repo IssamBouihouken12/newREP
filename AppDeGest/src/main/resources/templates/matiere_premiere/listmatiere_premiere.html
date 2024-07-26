@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Matières Premières</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        .actions a {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+<h2>Liste des Matières Premières</h2>
+<a href="/matieres_premieres/create">Ajouter une Matière Première</a>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Code Article</th>
+        <th>Libellé Article</th>
+        <th>Fournisseur</th>
+        <th>Quantité</th>
+        <th>DP</th>
+        <th>Unité de Mesure</th>
+        <th>Prix Unitaire</th>
+        <th>Code Barre</th>
+        <th>Type</th>
+        <th>Actif</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="matiere_premiere : ${matieres_premieres}">
+        <td th:text="${matiere_premiere.id_mat}"></td>
+        <td th:text="${matiere_premiere.code_article}"></td>
+        <td th:text="${matiere_premiere.libelle_article}"></td>
+        <td th:text="${matiere_premiere.fournisseur}"></td>
+        <td th:text="${matiere_premiere.qte_mat}"></td>
+        <td th:text="${matiere_premiere.dp_mat}"></td>
+        <td th:text="${matiere_premiere.unite_mesure}"></td>
+        <td th:text="${matiere_premiere.prix_unitaire}"></td>
+        <td th:text="${matiere_premiere.code_barre}"></td>
+        <td th:text="${matiere_premiere.type_mat}"></td>
+        <td th:text="${matiere_premiere.actif ? 'Oui' : 'Non'}"></td>
+        <td class="actions">
+            <a th:href="@{/matieres_premieres/edit/{id}(id=${matiere_premiere.id_mat})}">Modifier</a>
+            <a th:href="@{/matieres_premieres/delete/{id}(id=${matiere_premiere.id_mat})}" th:onclick="return confirm('Voulez-vous vraiment supprimer cette matière première ?')">Supprimer</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

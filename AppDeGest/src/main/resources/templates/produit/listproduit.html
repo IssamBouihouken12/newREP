@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Liste des Produits</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    th, td {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    a {
+      text-decoration: none;
+      color: #007bff;
+    }
+  </style>
+</head>
+<body>
+<h2>Liste des Produits</h2>
+<a href="/produits/create">Ajouter un Produit</a>
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Nom</th>
+    <th>Quantité</th>
+    <th>Actif</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="produit : ${produits}">
+    <td th:text="${produit.id_prod}"></td>
+    <td th:text="${produit.nom_prod}"></td>
+    <td th:text="${produit.qte_prod}"></td>
+    <td th:text="${produit.actif ? 'Oui' : 'Non'}"></td>
+    <td>
+      <a th:href="@{/produits/edit/{id}(id=${produit.id_prod})}">Modifier</a>
+      <a th:href="@{/produits/delete/{id}(id=${produit.id_prod})}" th:onclick="return confirm('Voulez-vous vraiment supprimer ce produit ?')">Supprimer</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

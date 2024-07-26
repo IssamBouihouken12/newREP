@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Stocks</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<h2>Liste des Stocks</h2>
+<a href="/stocks/create">Ajouter un Stock</a>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>ID Matière</th>
+        <th>Quantité</th>
+        <th>Actif</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="stock : ${stocks}">
+        <td th:text="${stock.id_stock}"></td>
+        <td th:text="${stock.id_mat}"></td>
+        <td th:text="${stock.qte_mat}"></td>
+        <td th:text="${stock.actif ? 'Oui' : 'Non'}"></td>
+        <td>
+            <a th:href="@{/stocks/edit/{id_stock}(id_stock=${stock.id_stock})}">Modifier</a>
+            <a th:href="@{/stocks/delete/{id_stock}(id_stock=${stock.id_stock})}" th:onclick="return confirm('Voulez-vous vraiment supprimer ce stock ?')">Supprimer</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

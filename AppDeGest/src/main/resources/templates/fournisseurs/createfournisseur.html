@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${fournisseur.id_four != null ? 'Modifier Fournisseur' : 'Ajouter Fournisseur'}"></title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+<h2 th:text="${fournisseur.id_four != null ? 'Modifier Fournisseur' : 'Ajouter Fournisseur'}"></h2>
+<form th:action="@{/fournisseurs/save}" th:object="${fournisseur}" method="post">
+    <!-- Hidden field for the ID -->
+    <input type="hidden" th:field="*{fournisseur.id_four}" />
+
+    <!-- Nom du fournisseur -->
+    <label for="nom_four">Nom du fournisseur:</label>
+    <input type="text" id="nom_four" th:field="*{fournisseur.nom_four}" required />
+
+    <!-- Téléphone -->
+    <label for="tel_four">Téléphone:</label>
+    <input type="tel" id="tel_four" th:field="*{fournisseur.tel_four}" required />
+
+    <!-- Adresse -->
+    <label for="adresse_four">Adresse:</label>
+    <input type="text" id="adresse_four" th:field="*{fournisseur.adresse_four}" required />
+
+    <!-- Actif -->
+    <label for="actif">Actif:</label>
+    <select id="actif" th:field="*{fournisseur.actif}">
+        <option value="true" th:selected="${fournisseur.actif}">Oui</option>
+        <option value="false" th:selected="${!fournisseur.actif}">Non</option>
+    </select>
+
+    <!-- Submit button -->
+    <button type="submit" th:text="${fournisseur.id_four != null ? 'Mettre à jour' : 'Enregistrer'}"></button>
+</form>
+<a href="/fournisseurs">Retour à la liste</a>
+</body>
+</html>

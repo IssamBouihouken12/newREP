@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Modifier Produit</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      box-sizing: border-box;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+<h2>Modifier un Produit</h2>
+<form th:action="@{/produits/update/{id}(id=${produit.id_prod})}" th:object="${produit}" method="post">
+  <input type="hidden" th:field="*{produit.id_prod}" />
+
+  <label for="nom_prod">Nom du produit:</label>
+  <input type="text" id="nom_prod" th:field="*{produit.nom_prod}" required />
+
+  <label for="qte_prod">Quantité:</label>
+  <input type="number" id="qte_prod" th:field="*{produit.qte_prod}" required />
+
+  <label for="actif">Actif:</label>
+  <select id="actif" th:field="*{produit.actif}">
+    <option value="true" th:selected="${produit.actif}">Oui</option>
+    <option value="false" th:selected="${!produit.actif}">Non</option>
+  </select>
+
+  <button type="submit">Mettre à jour</button>
+</form>
+<a href="/produits">Retour à la liste</a>
+</body>
+</html>

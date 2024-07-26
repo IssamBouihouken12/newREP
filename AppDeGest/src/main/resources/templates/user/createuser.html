@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Ajouter un Utilisateur</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    input, button {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      box-sizing: border-box;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+<h2>Ajouter un Utilisateur</h2>
+<form th:action="@{/users/save}" th:object="${user}" method="post">
+  <input type="hidden" th:field="*{user.id_user}" />
+
+  <label for="nom_user">Nom :</label>
+  <input type="text" id="nom_user" th:field="*{user.nom_user}" required />
+
+  <label for="adresse_user">Adresse :</label>
+  <input type="text" id="adresse_user" th:field="*{user.adresse_user}" required />
+
+  <label for="tel_user">Téléphone :</label>
+  <input type="tel" id="tel_user" th:field="*{user.tel_user}" required />
+
+  <label for="poste_user">Poste :</label>
+  <input type="text" id="poste_user" th:field="*{user.poste_user}" required />
+
+  <label for="departement_user">Département :</label>
+  <input type="text" id="departement_user" th:field="*{user.departement_user}" required />
+
+  <label for="actif">Actif :</label>
+  <input type="checkbox" id="actif" th:field="*{user.actif}" />
+
+  <button type="submit">Enregistrer</button>
+</form>
+<a href="/users">Retour à la liste</a>
+</body>
+</html>

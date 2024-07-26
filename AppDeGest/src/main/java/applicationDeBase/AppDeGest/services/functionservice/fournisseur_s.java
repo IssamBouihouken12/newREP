@@ -17,6 +17,7 @@ public class fournisseur_s {
 
     public List<fournisseur> Afficher()
     { return fournisseurrepository.findAll();}
+
     public fournisseur ajouterfournisseur(fournisseur fournisseur) {
         return fournisseurrepository.save(fournisseur);
     }
