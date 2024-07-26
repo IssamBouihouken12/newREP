@@ -5,18 +5,20 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Optional;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "fournisseurs")
 public class fournisseur {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_four")
     private Long id_four;
-
+    @Column (name="actif")
+    private boolean actif = true;
     @Column(name = "nom_four", nullable = false)
     private String nom_four;
 
@@ -25,6 +27,9 @@ public class fournisseur {
 
     @Column(name = "adresse_four", nullable = false)
     private String adresse_four;
+
+    public fournisseur(Optional<fournisseur> byId) {
+    }
 
     // Getters and setters omitted for brevity
 
