@@ -8,13 +8,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/stocks")
 public class stockcontroller {
 
     private final stock_s stockService;
-    private final applicationDeBase.AppDeGest.Repository.stockRepository stockRepository;
+    private final stockRepository stockRepository;
 
     public stockcontroller(stock_s stockService, stockRepository stockRepository) {
         this.stockService = stockService;
@@ -46,9 +47,9 @@ public class stockcontroller {
     // Afficher le formulaire pour modifier un stock existant
     @GetMapping("/edit/{id_stock}")
     public String editStockForm(@PathVariable("id_stock") Long id_stock, Model model) {
-        stock stock = stockRepository.findById(id_stock).get();  // Méthode à ajouter dans votre service pour récupérer un stock par ID
-        if (stock != null) {
-            model.addAttribute("stock", stock);
+        Optional<stock> stockOpt = stockRepository.findById(id_stock);  // Méthode à ajouter dans votre service pour récupérer un stock par ID
+        if (stockOpt.isPresent()) {
+            model.addAttribute("stock", stockOpt.get());
             return "edit_stock";  // Nom du template Thymeleaf pour modifier un stock
         }
         return "redirect:/stocks";  // Redirection si le stock n'existe pas

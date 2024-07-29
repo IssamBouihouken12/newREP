@@ -8,13 +8,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/users")
 public class usercontroller {
 
     private final user_s userService;
-    private final applicationDeBase.AppDeGest.Repository.userRepository userRepository;
+    private final userRepository userRepository;
 
     public usercontroller(user_s userService, userRepository userRepository) {
         this.userService = userService;
@@ -46,9 +47,9 @@ public class usercontroller {
     // Afficher le formulaire pour modifier un utilisateur existant
     @GetMapping("/edit/{id_user}")
     public String editUserForm(@PathVariable("id_user") Long id_user, Model model) {
-        user user = userRepository.findById(id_user).get();  // Méthode à ajouter dans votre service pour récupérer un utilisateur par ID
-        if (user != null) {
-            model.addAttribute("user", user);
+        Optional<user> userOpt = userRepository.findById(id_user);
+        if (userOpt.isPresent()) {
+            model.addAttribute("user", userOpt.get());
             return "edit_user";  // Nom du template Thymeleaf pour modifier un utilisateur
         }
         return "redirect:/users";  // Redirection si l'utilisateur n'existe pas

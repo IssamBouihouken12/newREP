@@ -62,4 +62,3 @@ public class produitcontroller {
         return "redirect:/produits";
     }
 }
-

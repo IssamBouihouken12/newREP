@@ -26,14 +26,14 @@ public class fournisseurcontroller {
 
     @GetMapping("/create")
     public String createFournisseurForm(Model model) {
-        model.addAttribute("fournisseurs", new fournisseur());
-        return  "redirect:fournisseurs/createfournisseur.html";
+        model.addAttribute("fournisseur", new fournisseur());
+        return  "fournisseurs/createfournisseur";
     }
 
     @PostMapping("/save")
     public String saveFournisseur(@ModelAttribute("fournisseur") fournisseur fournisseur) {
         fournisseurService.ajouterfournisseur(fournisseur);
-        return "redirect:/fournisseurs/index";
+        return "redirect:/fournisseurs/list";
     }
 
     @GetMapping("/edit/{id}")
@@ -43,7 +43,7 @@ public class fournisseurcontroller {
             model.addAttribute("fournisseur", fournisseurOpt.get());
             return "localhost:8085/fournisseurs/updatefournisseur";
         } else {
-            return "redirect:/fournisseurs/index";
+            return "redirect:/fournisseurs/list";
         }
     }
 
@@ -51,12 +51,12 @@ public class fournisseurcontroller {
     public String updateFournisseur(@PathVariable("id") Long id, @ModelAttribute("fournisseur") fournisseur fournisseur) {
         fournisseur.setId_four(id);
         fournisseurService.modifierfournisseur(id, fournisseur);
-        return "redirect:/fournisseurs/index";
+        return "redirect:/fournisseurs/list";
     }
 
         @GetMapping("/delete/{id}")
     public String deleteFournisseur(@PathVariable("id") Long id) {
         fournisseurService.supprimerfournisseur(id);
-        return "redirect:qnnn/index.html";
+        return "redirect:fousrnisseurs/list";
     }
 }
