@@ -17,8 +17,8 @@ public class fournisseur {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_four")
     private Long id_four;
-    @Column (name="actif")
-    private boolean actif = true;
+    @Column(nullable = false)
+    private Boolean actif=false;
     @Column(name = "nom_four", nullable = false)
     private String nom_four;
 

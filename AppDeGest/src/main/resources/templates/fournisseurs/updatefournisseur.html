@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${fournisseur.id_four != null ? 'Modifier Fournisseur' : 'Ajouter Fournisseur'}"></title>
+    <title>Modifier Fournisseur</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -29,8 +29,8 @@
     </style>
 </head>
 <body>
-<h2 th:text="${fournisseur.id_four != null ? 'Modifier Fournisseur' : 'Ajouter Fournisseur'}"></h2>
-<form th:action="@{/fournisseurs/save}" th:object="${fournisseur}" method="post">
+<h2>Modifier Fournisseur</h2>
+<form th:action="@{/fournisseurs/update/{id}(id=${fournisseur.id_four})}" th:object="${fournisseur}" method="post">
     <!-- Hidden field for the ID -->
     <input type="hidden" th:field="*{fournisseur.id_four}" />
 
@@ -54,8 +54,8 @@
     </select>
 
     <!-- Submit button -->
-    <button type="submit" th:text="${fournisseur.id_four != null ? 'Mettre à jour' : 'Enregistrer'}"></button>
+    <button type="submit">Mettre à jour</button>
 </form>
-<a href="index.html">Retour à la liste</a>
+<a href="/fournisseurs">Retour à la liste</a>
 </body>
 </html>

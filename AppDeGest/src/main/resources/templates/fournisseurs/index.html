@@ -5,37 +5,58 @@
     <title>Liste des Fournisseurs</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             padding: 20px;
+            background-color: #f0f0f0;
         }
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
         }
+
         th, td {
-            border: 1px solid #dddddd;
+            border: 1px solid #e0e0e0;
             text-align: left;
-            padding: 8px;
+            padding: 12px;
         }
+
         th {
             background-color: #f2f2f2;
+            color: #333333;
+            text-transform: uppercase;
         }
+
         a {
             text-decoration: none;
             color: #007bff;
+            transition: color 0.3s;
         }
-        .status-active {
-            color: green;
+
+        a:hover {
+            color: #0056b3;
         }
-        .status-inactive {
-            color: red;
+
+        status-active {
+            color: #28a745;
+            font-weight: bold;
         }
+
+        status-inactive {
+            color: #dc3545;
+            font-weight: bold;
+        }
+
     </style>
 </head>
 <body>
 <h2>Liste des Fournisseurs</h2>
-<a href="/fournisseurs/create">Ajouter un Fournisseur</a>
+<a href="createfournisseur.html">Ajouter un Fournisseur</a>
 <table>
     <thead>
     <tr>
@@ -59,7 +80,7 @@
         </td>
         <td>
             <a th:href="@{/fournisseurs/edit/{id}(id=${fournisseur.id_four})}">Modifier</a>
-            <a th:href="@{/fournisseurs/delete/{id}(id=${fournisseur.id_four})}"
+            <a th:href="@{/fournisseurs/index.html/{id}(id=${fournisseur.id_four})}"
                th:onclick="return confirm('Voulez-vous vraiment supprimer ce fournisseur ?')">Supprimer</a>
         </td>
     </tr>

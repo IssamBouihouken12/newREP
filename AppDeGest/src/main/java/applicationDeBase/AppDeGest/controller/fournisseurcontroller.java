@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 @Controller
+
 @RequestMapping("/fournisseurs")
 public class fournisseurcontroller {
 
@@ -25,14 +26,14 @@ public class fournisseurcontroller {
 
     @GetMapping("/create")
     public String createFournisseurForm(Model model) {
-        model.addAttribute("fournisseur", new fournisseur());
-        return "fournisseurs/form";
+        model.addAttribute("fournisseurs", new fournisseur());
+        return  "redirect:fournisseurs/createfournisseur.html";
     }
 
     @PostMapping("/save")
     public String saveFournisseur(@ModelAttribute("fournisseur") fournisseur fournisseur) {
         fournisseurService.ajouterfournisseur(fournisseur);
-        return "redirect:/fournisseurs";
+        return "redirect:/fournisseurs/index";
     }
 
     @GetMapping("/edit/{id}")
@@ -40,9 +41,9 @@ public class fournisseurcontroller {
         Optional<fournisseur> fournisseurOpt = fournisseurService.Afficher().stream().filter(f -> f.getId_four().equals(id)).findFirst();
         if (fournisseurOpt.isPresent()) {
             model.addAttribute("fournisseur", fournisseurOpt.get());
-            return "fournisseurs/form";
+            return "localhost:8085/fournisseurs/updatefournisseur";
         } else {
-            return "redirect:/fournisseurs";
+            return "redirect:/fournisseurs/index";
         }
     }
 
@@ -50,12 +51,12 @@ public class fournisseurcontroller {
     public String updateFournisseur(@PathVariable("id") Long id, @ModelAttribute("fournisseur") fournisseur fournisseur) {
         fournisseur.setId_four(id);
         fournisseurService.modifierfournisseur(id, fournisseur);
-        return "redirect:/fournisseurs";
+        return "redirect:/fournisseurs/index";
     }
 
-    @GetMapping("/delete/{id}")
+        @GetMapping("/delete/{id}")
     public String deleteFournisseur(@PathVariable("id") Long id) {
         fournisseurService.supprimerfournisseur(id);
-        return "redirect:/fournisseurs";
+        return "redirect:qnnn/index.html";
     }
 }
